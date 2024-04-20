@@ -1,0 +1,20 @@
+{
+  "name": "week2-ines",
+  "version": "1.0.0",
+  "description": "## Installation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.19.2",
+    "mongodb-memory-server": "^7.4.2",
+    "mongoose": "^5.13.5",
+    "uuid": "^9.0.1"
+  }
+}
