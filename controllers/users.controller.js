@@ -1,8 +1,6 @@
 const User = require("../models/user.model");
-const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
-
-const sessions = require("../middlewares/auth.middlewares");
+const jwt = require("jsonwebtoken");
 
 module.exports.create = (req, res) => {
   User.create(req.body)
@@ -77,8 +75,13 @@ module.exports.login = (req, res) => {
   User.findOne({ email: req.body.email })
     .then(async (user) => {
       if (user && (await bcrypt.compare(req.body.password, user.password))) {
-        const token = uuidv4();
-        sessions.push({ token, userId: user._id });
+        const token = jwt.sign(
+          {
+            sub: user.id,
+            exp: Date.now() / 1000 + 120,
+          },
+          process.env.JWT_SECRET
+        );
         res.json({ token });
       } else {
         res.status(401).json({ message: "Invalid credentials" });

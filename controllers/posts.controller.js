@@ -1,6 +1,4 @@
 const Post = require("../models/post.model");
-const { v4: uuidv4 } = require("uuid");
-const sessions = require("../middlewares/auth.middlewares");
 
 module.exports.create = (req, res) => {
   Post.create(req.body)
